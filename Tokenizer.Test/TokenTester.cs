@@ -25,8 +25,11 @@ namespace Tokenizer.Test
 
             token = service.UpdateToken(token.Key, false).Result;
             isValid = service.ValidateToken(token.Key).Result;
-
             Assert.IsFalse(isValid, "After invalidating, token must be invalid.");
+
+            token = service.UpdateToken(token.Key, true).Result;
+            isValid = service.ValidateToken(token.Key).Result;
+            Assert.IsTrue(isValid, "Re enabled token must be valid.");
         }
     }
 }

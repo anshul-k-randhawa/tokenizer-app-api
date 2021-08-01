@@ -18,13 +18,6 @@ namespace Tokenizer.Infra.Repositories
             _Items = new List<T>();
         }
 
-        public async virtual Task<bool> ValidateEntity(string key)
-        {
-            var result = await Task.Run<bool>(() => _Items.Count > 0 && _Items.Any(i => i.Key.Equals(key) && i.Validity > DateTime.Now));
-            
-            return result;
-        }
-
         public async virtual Task<T> UpdateEntity(string key, bool valid)
         {
             var result = await Task.Run<T>(() => _Items.FirstOrDefault<T>(i => i.Key.Equals(key)));
